@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Page</title>
+</head>
+<body>
+
+    <table border="2">
+        <tr>
+            <th>Employee Name</th>
+            <th>Employee Id</th>
+            <th>Employee Salary</th>
+            <th>Update</th>
+            <th>Delete</th>
+        </tr>
+
+        {% for x in data %}
+        <tr>
+            <td>{{ x.emp_name }}</td>
+            <td>{{ x.emp_id }}</td>
+            <td>{{ x.emp_salary }}</td>
+
+            <td>
+                <a href="{% url 'emp_update' x.id %}">Edit</a>
+            </td>
+
+            <td>
+                <a href="{% url 'emp_delete' x.id %}">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <hr>
+
+    <h3>Add Employee</h3>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Submit">
+    </form>
+
+</body>
+</html>
